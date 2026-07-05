@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import Magnetic from './Magnetic';
 
 interface NavItem {
   name: string;
@@ -73,67 +74,74 @@ export const FloatingNavbar: React.FC = () => {
         <div
           className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-500 rounded-full px-6 md:px-8 ${
             isScrolled
-              ? 'py-3 bg-white/70 backdrop-blur-md shadow-premium border border-black/5'
+              ? 'py-3 bg-white/80 backdrop-blur-md shadow-premium border border-black/5'
               : 'py-5 bg-transparent border border-transparent'
           }`}
         >
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('#hero')}>
-            <div className="w-8 h-8 rounded-full bg-primaryGreen border border-black/10 flex items-center justify-center shadow-sm">
-              <span className="font-display font-extrabold text-white text-[16px]">D</span>
+          <Magnetic>
+            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => scrollToSection('#hero')}>
+              <svg className="w-7 h-7 text-primaryGreen select-none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 15H55C72 15 85 28 85 45C85 62 72 75 55 75H20V15Z" stroke="currentColor" strokeWidth="10" strokeLinejoin="round" />
+                <path d="M40 32H52C56 32 60 36 60 40C60 44 56 48 52 48H40V32Z" fill="#111111" />
+                <path d="M32 58L22 48L32 38" stroke="#16A34A" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="font-display font-black text-[20px] tracking-tight text-dark">
+                Devlix<span className="text-primaryGreen">.</span>
+              </span>
             </div>
-            <span className="font-display font-bold text-[19px] tracking-tight text-dark">
-              Devlix<span className="text-primaryGreen">.</span>
-            </span>
-          </div>
+          </Magnetic>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-1 items-center bg-secondaryBg/80 p-1.5 rounded-full border border-black/[0.04] relative">
             {navItems.map(item => {
               const isActive = activeSection === item.href;
               return (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className="px-4 py-2 text-[13px] font-medium text-dark/70 hover:text-dark uppercase tracking-wider relative transition-colors duration-200"
-                  onMouseEnter={() => setHoveredItem(item.name)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                >
-                  {/* Sliding capsule indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {/* Hover indicator */}
-                  {!isActive && hoveredItem === item.name && (
-                    <motion.div
-                      layoutId="hoverTab"
-                      className="absolute inset-0 bg-black/[0.03] rounded-full -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {item.name}
-                </a>
+                <Magnetic key={item.name}>
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }}
+                    className="px-4 py-2 text-[13px] font-medium text-dark/70 hover:text-dark uppercase tracking-wider relative transition-colors duration-200 block"
+                    onMouseEnter={() => setHoveredItem(item.name)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                  >
+                    {/* Sliding capsule indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-white shadow-sm rounded-full -z-10 border border-black/5"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    {/* Hover indicator */}
+                    {!isActive && hoveredItem === item.name && (
+                      <motion.div
+                        layoutId="hoverTab"
+                        className="absolute inset-0 bg-black/[0.03] rounded-full -z-10"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    {item.name}
+                  </a>
+                </Magnetic>
               );
             })}
           </nav>
 
           {/* Call to Action Button */}
           <div className="hidden md:flex items-center gap-4">
-            <button
-              onClick={() => scrollToSection('#contact')}
-              className="btn-primary"
-            >
-              Start Project
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <Magnetic>
+              <button
+                onClick={() => scrollToSection('#contact')}
+                className="btn-primary"
+              >
+                Start Project
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Magnetic>
           </div>
 
           {/* Mobile Menu Button */}

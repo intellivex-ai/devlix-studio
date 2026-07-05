@@ -213,12 +213,14 @@ textarea:focus-visible {
 }
 
 
-/* Grid layout lines helper */
+/* Grid layout lines helper with radial fading mask for a high-end glowing panel */
 .grid-lines {
-  background-size: 40px 40px;
+  background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(34, 197, 94, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 197, 94, 0.06) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at 50% 50%, black 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 10%, transparent 75%);
 }
 
 /* Performance rendering optimizations via CSS Containment */
