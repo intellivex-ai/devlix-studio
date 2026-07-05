@@ -52,7 +52,7 @@ const testimonials: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-24 bg-white overflow-hidden relative border-b border-black/[0.04]">
+    <section id="testimonials" className="py-24 bg-white overflow-hidden relative border-b border-black/[0.04] optimize-render">
       <div className="max-w-7xl mx-auto px-6 md:px-8 mb-16 text-center">
         <span className="text-[13px] font-bold text-primaryGreen block mb-3 uppercase tracking-wider">
           Client Success Stories

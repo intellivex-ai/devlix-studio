@@ -25,26 +25,38 @@ export const FloatingNavbar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Simple intersection observer behavior for active navigation item
-      const sections = navItems.map(item => item.href.substring(1));
-      let currentSection = '';
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // If the top of the section is in the top half of the screen
-          if (rect.top <= 150) {
-            currentSection = section;
-          }
-        }
-      }
-      setActiveSection(currentSection ? `#${currentSection}` : '');
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // High-performance IntersectionObserver for lag-free active section tracking
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(`#${entry.target.id}`);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    navItems.forEach((item) => {
+      const el = document.getElementById(item.href.substring(1));
+      if (el) {
+        observer.observe(el);
+      }
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -58,13 +70,12 @@ export const FloatingNavbar: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-40 px-4 md:px-8 py-4 transition-all duration-500">
-        <motion.div
+        <div
           className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-500 rounded-full px-6 md:px-8 ${
             isScrolled
               ? 'py-3 bg-white/70 backdrop-blur-md shadow-premium border border-black/5'
               : 'py-5 bg-transparent border border-transparent'
           }`}
-          layout
         >
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('#hero')}>
@@ -136,7 +147,7 @@ export const FloatingNavbar: React.FC = () => {
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
-        </motion.div>
+        </div>
       </header>
 
       {/* Mobile Drawer menu */}

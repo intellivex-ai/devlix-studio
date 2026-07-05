@@ -78,7 +78,7 @@ const comparisonData: ComparisonRow[] = [
 
 export const WhyDevlix: React.FC = () => {
   return (
-    <section id="why-us" className="py-24 md:py-32 bg-white relative">
+    <section id="why-us" className="py-24 md:py-32 bg-white relative optimize-render">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-20 text-left">

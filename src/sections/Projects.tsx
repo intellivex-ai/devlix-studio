@@ -122,7 +122,7 @@ export const Projects: React.FC = () => {
   const activeProject = projects.find(p => p.id === activeTab) || projects[0];
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-white relative">
+    <section id="projects" className="py-24 md:py-32 bg-white relative optimize-render">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">

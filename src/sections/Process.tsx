@@ -56,7 +56,7 @@ const steps: ProcessStep[] = [
 
 export const Process: React.FC = () => {
   return (
-    <section id="process" className="py-24 md:py-32 bg-secondaryBg relative overflow-hidden">
+    <section id="process" className="py-24 md:py-32 bg-secondaryBg relative overflow-hidden optimize-render">
       {/* Background soft glowing blur */}
       <div className="absolute left-[-15%] bottom-[-10%] w-[50vw] h-[50vw] rounded-full filter blur-[130px] opacity-[0.03] bg-accentGreen pointer-events-none" />
 

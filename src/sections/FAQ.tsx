@@ -38,7 +38,7 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 md:py-32 bg-white relative">
+    <section id="faq" className="py-24 md:py-32 bg-white relative optimize-render">
       <div className="max-w-4xl mx-auto px-6 md:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 max-w-xl mx-auto">

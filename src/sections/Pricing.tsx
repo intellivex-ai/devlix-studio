@@ -70,7 +70,7 @@ const plans: PricingPlan[] = [
 
 export const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-secondaryBg relative overflow-hidden">
+    <section id="pricing" className="py-24 md:py-32 bg-secondaryBg relative overflow-hidden optimize-render">
       {/* Background soft glow blur */}
       <div className="absolute right-[-10%] bottom-[-10%] w-[45vw] h-[45vw] rounded-full filter blur-[120px] opacity-[0.03] bg-primaryGreen pointer-events-none" />
 

@@ -73,7 +73,7 @@ export const TechCloud: React.FC = () => {
   return (
     <section 
       id="tech" 
-      className="py-24 bg-secondaryBg relative overflow-hidden"
+      className="py-24 bg-secondaryBg relative overflow-hidden optimize-render"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Section Header */}

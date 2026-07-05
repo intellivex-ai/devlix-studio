@@ -65,7 +65,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white relative">
+    <section id="contact" className="py-24 md:py-32 bg-white relative optimize-render">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="bg-secondaryBg/30 border border-black/5 rounded-[32px] p-8 md:p-16 lg:p-20 shadow-premium grid grid-cols-1 lg:grid-cols-12 gap-16 items-start overflow-hidden relative">
           

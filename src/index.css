@@ -124,3 +124,17 @@ textarea:focus-visible {
     linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
 }
+
+/* Performance rendering optimizations via CSS Containment */
+.optimize-render {
+  content-visibility: auto;
+}
+
+#projects { contain-intrinsic-size: auto 900px; }
+#process { contain-intrinsic-size: auto 1200px; }
+#why-us { contain-intrinsic-size: auto 600px; }
+#tech { contain-intrinsic-size: auto 600px; }
+#testimonials { contain-intrinsic-size: auto 500px; }
+#pricing { contain-intrinsic-size: auto 800px; }
+#faq { contain-intrinsic-size: auto 600px; }
+#contact { contain-intrinsic-size: auto 800px; }
