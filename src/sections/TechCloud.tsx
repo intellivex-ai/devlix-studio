@@ -106,7 +106,7 @@ export const TechCloud: React.FC = () => {
           {/* Mouse-reactive parent layer */}
           <motion.div 
             className="w-full h-full relative"
-            style={{ x: springX, y: springY }}
+            style={{ x: springX, y: springY, willChange: 'transform' }}
           >
             {technologies.map((tech) => {
               return (
@@ -119,7 +119,8 @@ export const TechCloud: React.FC = () => {
                     left: `${tech.xOffset}%`,
                     top: `${tech.yOffset}%`,
                     animationDuration: `${tech.speed}s`,
-                    animationDelay: `${(tech.xOffset + tech.yOffset) * -0.1}s` // staggered starting points
+                    animationDelay: `${(tech.xOffset + tech.yOffset) * -0.1}s`, // staggered starting points
+                    willChange: 'transform'
                   }}
                 >
                   {tech.name}

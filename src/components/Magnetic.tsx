@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface MagneticProps {
   children: React.ReactElement;
@@ -9,7 +9,13 @@ interface MagneticProps {
 
 export const Magnetic: React.FC<MagneticProps> = ({ children, range = 70, strength = 0.4 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth springs for high performance motion without React renders
+  const springX = useSpring(x, { stiffness: 120, damping: 12, mass: 0.1 });
+  const springY = useSpring(y, { stiffness: 120, damping: 12, mass: 0.1 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -22,14 +28,17 @@ export const Magnetic: React.FC<MagneticProps> = ({ children, range = 70, streng
 
     const distance = Math.hypot(distanceX, distanceY);
     if (distance < range) {
-      setPosition({ x: distanceX * strength, y: distanceY * strength });
+      x.set(distanceX * strength);
+      y.set(distanceY * strength);
     } else {
-      setPosition({ x: 0, y: 0 });
+      x.set(0);
+      y.set(0);
     }
   };
 
   const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+    x.set(0);
+    y.set(0);
   };
 
   return (
@@ -37,8 +46,7 @@ export const Magnetic: React.FC<MagneticProps> = ({ children, range = 70, streng
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: 'spring', stiffness: 120, damping: 12, mass: 0.1 }}
+      style={{ x: springX, y: springY, willChange: 'transform' }}
       className="inline-flex items-center justify-center"
     >
       {children}

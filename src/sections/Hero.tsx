@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Image as ImageIcon, Wallet, Globe } from 'lucide-react';
 import DeviceMockup from '../components/DeviceMockup';
 import Magnetic from '../components/Magnetic';
@@ -13,7 +13,7 @@ const CountUp: React.FC<{ end: number; duration?: number; decimals?: number; pre
   prefix = '',
   suffix = '',
 }) => {
-  const [count, setCount] = useState(0);
+  const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     let startTimestamp: number | null = null;
@@ -22,7 +22,12 @@ const CountUp: React.FC<{ end: number; duration?: number; decimals?: number; pre
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-      setCount(progress * end);
+      const currentVal = progress * end;
+      
+      if (spanRef.current) {
+        spanRef.current.textContent = `${prefix}${currentVal.toFixed(decimals)}${suffix}`;
+      }
+
       if (progress < 1) {
         animationFrameId = window.requestAnimationFrame(step);
       }
@@ -30,12 +35,12 @@ const CountUp: React.FC<{ end: number; duration?: number; decimals?: number; pre
 
     animationFrameId = window.requestAnimationFrame(step);
     return () => window.cancelAnimationFrame(animationFrameId);
-  }, [end, duration]);
+  }, [end, duration, decimals, prefix, suffix]);
 
   return (
-    <span>
+    <span ref={spanRef}>
       {prefix}
-      {count.toFixed(decimals)}
+      {(0).toFixed(decimals)}
       {suffix}
     </span>
   );
@@ -43,8 +48,25 @@ const CountUp: React.FC<{ end: number; duration?: number; decimals?: number; pre
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [activePreview, setActivePreview] = useState<PreviewProject>('taabu');
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
+  const laptopX = useTransform(springX, (x) => x * 20);
+  const laptopY = useTransform(springY, (y) => y * 20);
+
+  const phoneX = useTransform(springX, (x) => x * -30);
+  const phoneY = useTransform(springY, (y) => y * -30);
+
+  const card1X = useTransform(springX, (x) => x * 15);
+  const card1Y = useTransform(springY, (y) => y * 15);
+
+  const card2X = useTransform(springX, (x) => x * -25);
+  const card2Y = useTransform(springY, (y) => y * -25);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -52,11 +74,13 @@ export const Hero: React.FC = () => {
     const { left, top, width, height } = containerRef.current.getBoundingClientRect();
     const x = (clientX - (left + width / 2)) / (width / 2); // ranges from -1 to 1
     const y = (clientY - (top + height / 2)) / (height / 2); // ranges from -1 to 1
-    setMouseOffset({ x, y });
+    mouseX.set(x);
+    mouseY.set(y);
   };
 
   const handleMouseLeave = () => {
-    setMouseOffset({ x: 0, y: 0 });
+    mouseX.set(0);
+    mouseY.set(0);
   };
 
   const containerVariants: any = {
@@ -191,11 +215,11 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-6 relative flex justify-center items-center mt-12 lg:mt-0 select-none min-h-[480px]">
           
           {/* Laptop Mockup with Parallax */}
-          <div 
-            className="w-full max-w-[480px] lg:max-w-none relative z-10 transition-transform duration-300 ease-out"
+          <motion.div 
+            className="w-full max-w-[480px] lg:max-w-none relative z-10"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * 20}px, ${mouseOffset.y * 20}px, 0)`,
-              willChange: 'transform'
+              x: laptopX,
+              y: laptopY,
             }}
           >
             <DeviceMockup type="macbook">
@@ -284,14 +308,14 @@ export const Hero: React.FC = () => {
                 </div>
               )}
             </DeviceMockup>
-          </div>
+          </motion.div>
 
           {/* Floating Phone Mockup with Parallax (opposite translate direction) */}
-          <div 
-            className="absolute -right-2 -bottom-10 w-[140px] sm:w-[170px] z-20 transition-transform duration-300 ease-out"
+          <motion.div 
+            className="absolute -right-2 -bottom-10 w-[140px] sm:w-[170px] z-20"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * -30}px, ${mouseOffset.y * -30}px, 0)`,
-              willChange: 'transform'
+              x: phoneX,
+              y: phoneY,
             }}
           >
             <DeviceMockup type="phone">
@@ -347,14 +371,14 @@ export const Hero: React.FC = () => {
                 </div>
               )}
             </DeviceMockup>
-          </div>
+          </motion.div>
 
           {/* Floating outcome glass cards with Parallax & Framer Motion float */}
-          <div 
-            className="absolute -left-12 top-6 z-20 hidden md:block transition-transform duration-300 ease-out"
+          <motion.div 
+            className="absolute -left-12 top-6 z-20 hidden md:block"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * 15}px, ${mouseOffset.y * 15}px, 0)`,
-              willChange: 'transform'
+              x: card1X,
+              y: card1Y,
             }}
           >
             <motion.div
@@ -373,13 +397,13 @@ export const Hero: React.FC = () => {
                 <span className="text-[9px] text-primaryGreen font-bold font-mono mt-0.5">0.7s load speed</span>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
-          <div 
-            className="absolute -right-8 top-16 z-20 hidden lg:block transition-transform duration-300 ease-out"
+          <motion.div 
+            className="absolute -right-8 top-16 z-20 hidden lg:block"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * -25}px, ${mouseOffset.y * -25}px, 0)`,
-              willChange: 'transform'
+              x: card2X,
+              y: card2Y,
             }}
           >
             <motion.div
@@ -398,7 +422,7 @@ export const Hero: React.FC = () => {
                 <span className="text-[9px] text-accentGreen font-bold font-mono mt-0.5">+214% conversion</span>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

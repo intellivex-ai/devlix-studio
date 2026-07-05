@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import { LazyMotion, domMax } from 'framer-motion';
 
 // Components
 import AnimatedMesh from './components/AnimatedMesh';
@@ -33,45 +34,49 @@ export const App: React.FC = () => {
       infinite: false,
     });
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
 
   return (
-    <div className="relative min-h-screen selection:bg-primaryGreen selection:text-white">
+    <LazyMotion features={domMax} strict>
+      <div className="relative min-h-screen selection:bg-primaryGreen selection:text-white">
 
-      {/* Animated gradient mesh background */}
-      <AnimatedMesh />
+        {/* Animated gradient mesh background */}
+        <AnimatedMesh />
 
-      {/* Floating glass navbar */}
-      <FloatingNavbar />
+        {/* Floating glass navbar */}
+        <FloatingNavbar />
 
-      {/* Page Sections */}
-      <main>
-        <Hero />
-        <Numbers />
-        <Services />
-        <Projects />
-        <Process />
-        <WhyDevlix />
-        <TechCloud />
-        <Testimonials />
-        <Pricing />
-        <FAQ />
-        <Contact />
-      </main>
+        {/* Page Sections */}
+        <main>
+          <Hero />
+          <Numbers />
+          <Services />
+          <Projects />
+          <Process />
+          <WhyDevlix />
+          <TechCloud />
+          <Testimonials />
+          <Pricing />
+          <FAQ />
+          <Contact />
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </LazyMotion>
   );
 };
 
