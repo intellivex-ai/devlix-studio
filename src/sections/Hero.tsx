@@ -1,10 +1,45 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Image as ImageIcon, Wallet, Globe } from 'lucide-react';
 import DeviceMockup from '../components/DeviceMockup';
 import Magnetic from '../components/Magnetic';
 
 type PreviewProject = 'taabu' | 'celeste' | 'taxrich';
+
+const CountUp: React.FC<{ end: number; duration?: number; decimals?: number; prefix?: string; suffix?: string }> = ({
+  end,
+  duration = 1.5,
+  decimals = 0,
+  prefix = '',
+  suffix = '',
+}) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp: number | null = null;
+    let animationFrameId: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      setCount(progress * end);
+      if (progress < 1) {
+        animationFrameId = window.requestAnimationFrame(step);
+      }
+    };
+
+    animationFrameId = window.requestAnimationFrame(step);
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [end, duration]);
+
+  return (
+    <span>
+      {prefix}
+      {count.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+};
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -314,33 +349,55 @@ export const Hero: React.FC = () => {
             </DeviceMockup>
           </div>
 
-          {/* Floating outcome glass cards with Parallax */}
+          {/* Floating outcome glass cards with Parallax & Framer Motion float */}
           <div 
-            className="absolute -left-12 top-6 bg-white/80 backdrop-blur-md border border-black/5 p-3 rounded-xl shadow-premium z-20 flex items-center gap-3 hidden md:flex transition-transform duration-300 ease-out"
+            className="absolute -left-12 top-6 z-20 hidden md:block transition-transform duration-300 ease-out"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * 12}px, ${mouseOffset.y * 12}px, 0)`,
+              transform: `translate3d(${mouseOffset.x * 15}px, ${mouseOffset.y * 15}px, 0)`,
               willChange: 'transform'
             }}
           >
-            <div className="w-8 h-8 rounded-lg bg-primaryGreen/10 flex items-center justify-center text-[16px]">⚡</div>
-            <div className="flex flex-col text-left">
-              <span className="text-[10px] text-dark/50 uppercase font-bold">Load Speed</span>
-              <span className="text-sm font-black text-dark">Under 1.0s Standard</span>
-            </div>
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="bg-white/60 backdrop-blur-md border border-black/5 hover:border-primaryGreen/30 p-3.5 rounded-xl shadow-premium flex items-center gap-3 hover:shadow-primaryGreen/5 transition-all duration-300 group cursor-default"
+            >
+              <div className="w-8.5 h-8.5 rounded-lg bg-primaryGreen/10 group-hover:bg-primaryGreen/20 flex items-center justify-center text-[16px] transition-colors duration-300 shadow-sm">
+                🚀
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[10px] text-dark/50 uppercase font-bold tracking-wider">PageSpeed Score</span>
+                <span className="text-[15px] font-black text-dark leading-tight">
+                  <CountUp end={98} suffix="/100" />
+                </span>
+                <span className="text-[9px] text-primaryGreen font-bold font-mono mt-0.5">0.7s load speed</span>
+              </div>
+            </motion.div>
           </div>
 
           <div 
-            className="absolute -right-8 top-16 bg-white/80 backdrop-blur-md border border-black/5 p-3 rounded-xl shadow-premium z-20 flex items-center gap-3 hidden lg:flex transition-transform duration-300 ease-out"
+            className="absolute -right-8 top-16 z-20 hidden lg:block transition-transform duration-300 ease-out"
             style={{ 
-              transform: `translate3d(${mouseOffset.x * -20}px, ${mouseOffset.y * -20}px, 0)`,
+              transform: `translate3d(${mouseOffset.x * -25}px, ${mouseOffset.y * -25}px, 0)`,
               willChange: 'transform'
             }}
           >
-            <div className="w-8 h-8 rounded-lg bg-accentGreen/10 flex items-center justify-center text-[16px]">🎯</div>
-            <div className="flex flex-col text-left">
-              <span className="text-[10px] text-dark/50 uppercase font-bold">Outcomes</span>
-              <span className="text-sm font-black text-dark">Conversion-Focused UI</span>
-            </div>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="bg-white/60 backdrop-blur-md border border-black/5 hover:border-accentGreen/30 p-3.5 rounded-xl shadow-premium flex items-center gap-3 hover:shadow-accentGreen/5 transition-all duration-300 group cursor-default"
+            >
+              <div className="w-8.5 h-8.5 rounded-lg bg-accentGreen/10 group-hover:bg-accentGreen/20 flex items-center justify-center text-[16px] transition-colors duration-300 shadow-sm">
+                📈
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-[10px] text-dark/50 uppercase font-bold tracking-wider">Client Revenue</span>
+                <span className="text-[15px] font-black text-dark leading-tight">
+                  <CountUp end={12} prefix="₹" suffix="M+" />
+                </span>
+                <span className="text-[9px] text-accentGreen font-bold font-mono mt-0.5">+214% conversion</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
