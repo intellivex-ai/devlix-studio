@@ -105,7 +105,7 @@ export const Process: React.FC = () => {
                     isEven ? 'md:pr-16 md:text-right' : 'md:pl-16'
                   }`}>
                     <div className="bg-white border border-black/5 rounded-2xl p-6 md:p-8 shadow-premium space-y-3 relative hover:shadow-premium-hover transition-shadow duration-300">
-                      <span className="text-[10px] font-mono font-bold text-primaryGreen uppercase tracking-widest block">
+                      <span className="text-[10px] font-mono font-bold text-emerald-800 uppercase tracking-widest block">
                         {step.phase}
                       </span>
                       <h4 className="text-[18px] md:text-[20px] font-bold text-dark">

@@ -104,9 +104,9 @@ export const WhyDevlix: React.FC = () => {
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
               <tr className="border-b border-black/[0.06]">
-                <th className="py-5 px-6 text-xs font-bold uppercase tracking-widest text-dark/40 font-mono">Performance Indicator</th>
+                <th className="py-5 px-6 text-xs font-bold uppercase tracking-widest text-dark/65 font-mono">Performance Indicator</th>
                 <th className="py-5 px-6 text-xs font-bold uppercase tracking-widest text-primaryGreen font-mono bg-primaryGreen/5 rounded-t-xl">Devlix Studio</th>
-                <th className="py-5 px-6 text-xs font-bold uppercase tracking-widest text-dark/40 font-mono">Other Agencies</th>
+                <th className="py-5 px-6 text-xs font-bold uppercase tracking-widest text-dark/65 font-mono">Other Agencies</th>
               </tr>
             </thead>
             <tbody>
@@ -136,7 +136,7 @@ export const WhyDevlix: React.FC = () => {
                       <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0">
                         <X className="w-3.5 h-3.5 text-red-500" />
                       </div>
-                      <span className="text-[14px] text-dark/50">{row.others}</span>
+                      <span className="text-[14px] text-dark/70">{row.others}</span>
                     </div>
                   </td>
                 </tr>

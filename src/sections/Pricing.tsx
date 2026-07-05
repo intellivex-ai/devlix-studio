@@ -114,7 +114,7 @@ export const Pricing: React.FC = () => {
               {/* Top content */}
               <div className="space-y-6">
                 <div>
-                  <span className="text-[10px] font-mono text-dark/40 uppercase tracking-widest block font-bold">
+                  <span className="text-[10px] font-mono text-dark/65 uppercase tracking-widest block font-bold">
                     {plan.tagline}
                   </span>
                   <h3 className="text-[20px] md:text-[22px] font-bold text-dark mt-1">
@@ -127,7 +127,7 @@ export const Pricing: React.FC = () => {
                     {plan.price}
                   </span>
                   {plan.name !== 'Enterprise Custom' && (
-                    <span className="text-xs text-dark/40 font-semibold uppercase tracking-wider ml-2">
+                    <span className="text-xs text-dark/65 font-semibold uppercase tracking-wider ml-2">
                       / project base
                     </span>
                   )}
@@ -160,11 +160,7 @@ export const Pricing: React.FC = () => {
                     e.preventDefault();
                     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className={`w-full py-4 rounded-full font-bold text-[12px] uppercase tracking-wider flex items-center justify-center transition-all active:scale-95 shadow-sm cursor-pointer ${
-                    plan.popular
-                      ? 'bg-primaryGreen text-white hover:bg-accentGreen border border-primaryGreen hover:border-accentGreen'
-                      : 'bg-dark text-white hover:bg-primaryGreen border border-dark hover:border-primaryGreen'
-                  }`}
+                  className={`w-full ${plan.popular ? 'btn-green' : 'btn-primary'}`}
                 >
                   {plan.cta}
                 </a>

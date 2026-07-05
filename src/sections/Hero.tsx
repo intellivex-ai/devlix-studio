@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center pt-28 pb-24 md:pt-36 md:pb-32 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
         {/* Left Editorial Copy */}
@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-[17px] sm:text-[20px] text-dark/70 max-w-xl leading-relaxed font-normal"
+            className="text-[17px] sm:text-[20px] text-dark/75 max-w-xl leading-relaxed font-normal"
           >
             We design, build, and scale custom software and websites. No templates, no AI placeholders—just pure, high-performance craftsmanship focused on growth, users, and speed.
           </motion.p>
@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
                 e.preventDefault();
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-primaryGreen hover:bg-accentGreen text-white px-8 py-4 rounded-full font-bold text-[13px] uppercase tracking-wider flex items-center justify-center gap-2 border border-primaryGreen hover:border-accentGreen transition-all shadow-md active:scale-95"
+              className="btn-green shadow-md"
             >
               Start Your Project
               <ArrowRight className="w-4.5 h-4.5" />
@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
                 e.preventDefault();
                 document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-secondaryBg hover:bg-black/5 text-dark border border-black/5 hover:border-black/10 px-8 py-4 rounded-full font-bold text-[13px] uppercase tracking-wider flex items-center justify-center transition-all active:scale-95"
+              className="btn-secondary"
             >
               See Our Work
             </a>

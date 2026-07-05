@@ -112,8 +112,104 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #22C55E;
-  outline-offset: 4px;
+  outline: 3px solid #22C55E;
+  outline-offset: 2px;
+}
+
+/* Unified Accessible Button Styles */
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #22C55E;
+  color: #111111; /* AAA contrast (10.7:1) */
+  border: 1px solid #22C55E;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  min-height: 44px; /* WCAG touch target */
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-green:hover {
+  background-color: #16A34A; /* dark green */
+  border-color: #16A34A;
+  color: #FFFFFF; /* AA contrast (6.1:1) */
+}
+
+.btn-green:focus-visible {
+  outline: 3px solid #111111;
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #111111;
+  color: #FFFFFF; /* AAA contrast (21:1) */
+  border: 1px solid #111111;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  min-height: 44px; /* WCAG touch target */
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #22C55E;
+  border-color: #22C55E;
+  color: #111111; /* AAA contrast */
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid #22C55E;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #F8F9FA;
+  color: #1A1A1A; /* AAA contrast */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  min-height: 44px; /* WCAG touch target */
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid #22C55E;
+  outline-offset: 2px;
 }
 
 

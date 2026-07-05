@@ -116,9 +116,9 @@ export const Services: React.FC = () => {
 
               {/* Bottom row / Metrics */}
               <div className="border-t border-black/5 mt-8 pt-6 space-y-4">
-                <div className="flex justify-between items-center text-xs font-semibold text-dark/50">
+                <div className="flex justify-between items-center text-xs font-semibold text-dark/70">
                   <span>Timeline: <strong className="text-dark">{service.timeline}</strong></span>
-                  <span>{service.price}</span>
+                  <span className="text-dark/80">{service.price}</span>
                 </div>
 
                 {/* Tech Badge Track */}
@@ -126,7 +126,7 @@ export const Services: React.FC = () => {
                   {service.tech.map(techItem => (
                     <span
                       key={techItem}
-                      className="text-[9px] font-mono uppercase bg-black/5 text-dark/60 px-2 py-0.5 rounded border border-black/[0.02]"
+                      className="text-[9px] font-mono uppercase bg-black/5 text-dark/75 px-2 py-0.5 rounded border border-black/[0.02]"
                     >
                       {techItem}
                     </span>

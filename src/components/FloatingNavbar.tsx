@@ -9,9 +9,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { name: 'Services', href: '#services' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Process', href: '#process' },
-  { name: 'Why Us', href: '#why-us' },
+  { name: 'Case Studies', href: '#projects' },
+  { name: 'Our Method', href: '#process' },
+  { name: 'Why Devlix', href: '#why-us' },
   { name: 'Pricing', href: '#pricing' },
   { name: 'FAQ', href: '#faq' },
 ];
@@ -129,8 +129,7 @@ export const FloatingNavbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-4">
             <button
               onClick={() => scrollToSection('#contact')}
-              data-cursor="magnetic"
-              className="bg-dark text-white hover:bg-primaryGreen border border-dark hover:border-primaryGreen px-6 py-2.5 rounded-full font-semibold text-[13px] uppercase tracking-wider flex items-center gap-2 transition-all duration-300 shadow-sm active:scale-95"
+              className="btn-primary"
             >
               Start Project
               <ArrowRight className="w-4 h-4" />
@@ -141,7 +140,7 @@ export const FloatingNavbar: React.FC = () => {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-dark hover:bg-black/5 rounded-full transition-colors"
+              className="w-11 h-11 flex items-center justify-center text-dark hover:bg-black/5 rounded-full transition-colors"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -172,7 +171,7 @@ export const FloatingNavbar: React.FC = () => {
                     e.preventDefault();
                     scrollToSection(item.href);
                   }}
-                  className={`py-3 text-[16px] font-semibold uppercase tracking-wider border-b border-black/[0.04] transition-colors ${
+                  className={`py-3.5 text-[16px] font-semibold uppercase tracking-wider border-b border-black/[0.04] transition-colors flex items-center min-h-[44px] ${
                     activeSection === item.href ? 'text-primaryGreen' : 'text-dark/80'
                   }`}
                 >
@@ -186,7 +185,7 @@ export const FloatingNavbar: React.FC = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
               onClick={() => scrollToSection('#contact')}
-              className="w-full bg-primaryGreen text-white py-4 rounded-full font-bold uppercase tracking-wider flex items-center justify-center gap-2 border border-primaryGreen hover:bg-accentGreen hover:border-accentGreen transition-colors shadow-sm"
+              className="w-full btn-green"
             >
               Start Project
               <ArrowRight className="w-4 h-4" />

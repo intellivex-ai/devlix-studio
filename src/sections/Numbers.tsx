@@ -37,7 +37,7 @@ const metrics: Metric[] = [
 
 export const Numbers: React.FC = () => {
   return (
-    <section className="py-20 md:py-28 bg-white border-y border-black/[0.04] relative">
+    <section className="py-24 md:py-32 bg-white border-y border-black/[0.04] relative">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
           {metrics.map((metric, idx) => (
@@ -56,7 +56,7 @@ export const Numbers: React.FC = () => {
                 <span className="text-xs font-bold uppercase tracking-wider text-dark block">
                   {metric.label}
                 </span>
-                <span className="text-[12px] text-dark/50 leading-relaxed block font-normal">
+                <span className="text-[12px] text-dark/70 leading-relaxed block font-normal">
                   {metric.subtext}
                 </span>
               </div>

@@ -52,7 +52,7 @@ const testimonials: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-24 bg-white overflow-hidden relative border-b border-black/[0.04] optimize-render">
+    <section id="testimonials" className="py-24 md:py-32 bg-white overflow-hidden relative border-b border-black/[0.04] optimize-render">
       <div className="max-w-7xl mx-auto px-6 md:px-8 mb-16 text-center">
         <span className="text-[13px] font-bold text-primaryGreen block mb-3 uppercase tracking-wider">
           Client Success Stories
@@ -91,7 +91,7 @@ export const Testimonials: React.FC = () => {
               </p>
 
               {/* Outcome Tag */}
-              <div className="mt-4 inline-block bg-primaryGreen/10 border border-primaryGreen/20 px-3 py-1 rounded-lg text-accentGreen text-xs font-bold font-mono">
+              <div className="mt-4 inline-block bg-primaryGreen/10 border border-primaryGreen/20 px-3 py-1 rounded-lg text-emerald-900 text-xs font-bold font-mono">
                 {t.outcome}
               </div>
 
@@ -102,7 +102,7 @@ export const Testimonials: React.FC = () => {
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-xs font-bold text-dark">{t.name}</span>
-                  <span className="text-[10px] text-dark/40 uppercase font-semibold">
+                  <span className="text-[10px] text-dark/65 uppercase font-semibold">
                     {t.role}, {t.company}
                   </span>
                 </div>

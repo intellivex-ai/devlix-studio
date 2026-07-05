@@ -140,51 +140,58 @@ export const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Name */}
                     <div className="flex flex-col gap-2">
-                      <label className="text-[11px] font-bold text-dark/50 uppercase tracking-widest">
+                      <label htmlFor="name-input" className="text-[11px] font-bold text-dark/70 uppercase tracking-widest">
                         Your Name *
                       </label>
                       <input
+                        id="name-input"
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
+                        aria-invalid={formErrors.name ? "true" : "false"}
+                        aria-describedby={formErrors.name ? "name-error" : undefined}
                         className={`w-full bg-secondaryBg/40 border rounded-xl p-4 text-sm text-dark placeholder-dark/30 focus:bg-white focus:outline-none transition-all ${
-                          formErrors.name ? 'border-red-500 ring-1 ring-red-500' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
+                          formErrors.name ? 'border-red-600 ring-1 ring-red-600' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
                         }`}
                         placeholder="John Doe"
                       />
                       {formErrors.name && (
-                        <span className="text-[10px] text-red-500 font-semibold">{formErrors.name}</span>
+                        <span id="name-error" className="text-xs text-red-600 font-semibold" role="alert">{formErrors.name}</span>
                       )}
                     </div>
 
                     {/* Email */}
                     <div className="flex flex-col gap-2">
-                      <label className="text-[11px] font-bold text-dark/50 uppercase tracking-widest">
+                      <label htmlFor="email-input" className="text-[11px] font-bold text-dark/70 uppercase tracking-widest">
                         Your Email *
                       </label>
                       <input
+                        id="email-input"
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        aria-invalid={formErrors.email ? "true" : "false"}
+                        aria-describedby={formErrors.email ? "email-error" : undefined}
                         className={`w-full bg-secondaryBg/40 border rounded-xl p-4 text-sm text-dark placeholder-dark/30 focus:bg-white focus:outline-none transition-all ${
-                          formErrors.email ? 'border-red-500 ring-1 ring-red-500' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
+                          formErrors.email ? 'border-red-600 ring-1 ring-red-600' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
                         }`}
                         placeholder="john@example.com"
                       />
                       {formErrors.email && (
-                        <span className="text-[10px] text-red-500 font-semibold">{formErrors.email}</span>
+                        <span id="email-error" className="text-xs text-red-600 font-semibold" role="alert">{formErrors.email}</span>
                       )}
                     </div>
                   </div>
 
                   {/* Organization */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] font-bold text-dark/50 uppercase tracking-widest">
+                    <label htmlFor="organization-input" className="text-[11px] font-bold text-dark/70 uppercase tracking-widest">
                       Company / Organization
                     </label>
                     <input
+                      id="organization-input"
                       type="text"
                       name="organization"
                       value={formData.organization}
@@ -196,28 +203,31 @@ export const Contact: React.FC = () => {
 
                   {/* Message */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-[11px] font-bold text-dark/50 uppercase tracking-widest">
+                    <label htmlFor="message-input" className="text-[11px] font-bold text-dark/70 uppercase tracking-widest">
                       Project Goals & Scope *
                     </label>
                     <textarea
+                      id="message-input"
                       name="message"
                       rows={5}
                       value={formData.message}
                       onChange={handleInputChange}
+                      aria-invalid={formErrors.message ? "true" : "false"}
+                      aria-describedby={formErrors.message ? "message-error" : undefined}
                       className={`w-full bg-secondaryBg/40 border rounded-xl p-4 text-sm text-dark placeholder-dark/30 focus:bg-white focus:outline-none transition-all ${
-                        formErrors.message ? 'border-red-500 ring-1 ring-red-500' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
+                        formErrors.message ? 'border-red-600 ring-1 ring-red-600' : 'border-black/5 focus:ring-1 focus:ring-primaryGreen/50 focus:border-primaryGreen'
                       }`}
                       placeholder="Describe what you want to build (timeline, budget, features)..."
                     />
                     {formErrors.message && (
-                      <span className="text-[10px] text-red-500 font-semibold">{formErrors.message}</span>
+                      <span id="message-error" className="text-xs text-red-600 font-semibold" role="alert">{formErrors.message}</span>
                     )}
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primaryGreen hover:bg-accentGreen text-white font-bold text-[12px] uppercase tracking-wider py-4 rounded-full border border-primaryGreen hover:border-accentGreen transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] disabled:opacity-50"
+                    className="w-full btn-green disabled:opacity-50"
                   >
                     {isSubmitting ? 'Sending Request...' : 'Send Message'}
                     {!isSubmitting && <Send className="w-4 h-4" />}
